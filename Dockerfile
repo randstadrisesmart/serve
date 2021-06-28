@@ -9,8 +9,8 @@ RUN pip3 install cython
 RUN pip3 install -U pip setuptools wheel
 RUN pip3 install spacy
 
-RUN export LC_ALL=C.UTF-8
-RUN export LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
 RUN python3 -m spacy download en_core_web_sm
 
 RUN pip3 install transformers
