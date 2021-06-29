@@ -1,6 +1,8 @@
 FROM pytorch/torchserve:0.1.1-cuda10.1-cudnn7-runtime
 
 USER 0
+RUN add-apt-repository ppa:deadsnakes/ppa
+RUN apt-get update
 RUN apt-get install python3-distutils
 
 RUN pip3 install -U pip setuptools wheel
