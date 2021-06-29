@@ -8,6 +8,7 @@ RUN apt-get install -y python3-distutils
 RUN pip3 install -U pip setuptools wheel
 RUN pip3 install cython
 RUN pip3 install spacy
+RUN pip3 install captum
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
