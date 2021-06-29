@@ -1,4 +1,4 @@
-FROM pytorch/torchserve
+FROM pytorch/torchserve:latest-gpu
 
 COPY . serve/
 RUN ls -la
