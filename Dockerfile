@@ -1,9 +1,7 @@
 FROM pytorch/torchserve:0.1.1-cuda10.1-cudnn7-runtime
 
 COPY . serve/
-RUN ls -la
-RUN ls -la serve/
-RUN pwd
+RUN apt-get install python3-distutils
 RUN pip3 install -U pip setuptools wheel
 RUN pip3 install cython
 RUN pip3 install -U pip setuptools wheel
