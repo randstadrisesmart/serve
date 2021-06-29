@@ -1,4 +1,4 @@
-FROM pytorch/torchserve:latest-gpu
+FROM pytorch/torchserve:0.1.1-cuda10.1-cudnn7-runtime
 
 COPY . serve/
 RUN ls -la
