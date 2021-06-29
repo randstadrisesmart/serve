@@ -1,7 +1,8 @@
 FROM pytorch/torchserve:0.1.1-cuda10.1-cudnn7-runtime
 
-COPY . serve/
+USER 0
 RUN apt-get install python3-distutils
+
 RUN pip3 install -U pip setuptools wheel
 RUN pip3 install cython
 RUN pip3 install -U pip setuptools wheel
@@ -11,12 +12,12 @@ ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 RUN python3 -m spacy download en_core_web_sm
 
+COPY . serve/
+
 RUN pip3 install transformers
 RUN torch-model-archiver --model-name bert-ner --version 1.0 --serialized-file /home/model-server/serve/final_ner_v2_gpu.pth --handler /home/model-server/serve/examples/Huggingface_Transformers/Transformer_handler_generalized.py --extra-files "/home/model-server/serve/examples/Huggingface_Transformers/setup_config.json,/home/model-server/serve/examples/Huggingface_Transformers/Token_classification_artifacts/index_to_name.json"
 
 RUN mv bert-ner.mar model-store/bert-ner.mar
-
-USER 0
 
 RUN rm /usr/local/bin/dockerd-entrypoint.sh
 
