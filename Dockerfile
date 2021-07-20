@@ -6,9 +6,9 @@ ARG TORCH_VISION_VER=0.6.1
 
 RUN apt-get update -y
 
-RUN pip install --no-cache-dir torch==$TORCH_VER+$CUDA_VERSION torchvision==$TORCH_VISION_VER+$CUDA_VERSION -f https://download.pytorch.org/whl/torch_stable.html; 
+RUN pip3 install --no-cache-dir torch==$TORCH_VER+$CUDA_VERSION torchvision==$TORCH_VISION_VER+$CUDA_VERSION -f https://download.pytorch.org/whl/torch_stable.html; 
 
-RUN pip install --no-cache-dir captum torchtext torchserve torch-model-archiver
+RUN pip3 install --no-cache-dir captum torchtext torchserve torch-model-archiver
 
 COPY . serve/
 
