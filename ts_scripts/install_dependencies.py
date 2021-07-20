@@ -13,7 +13,7 @@ from ts_scripts.utils import check_python_version
 class Common():
     def __init__(self):
         self.torch_stable_url = "https://download.pytorch.org/whl/torch_stable.html"
-        self.sudo_cmd = 'sudo '
+        self.sudo_cmd = ''
 
     def install_java(self):
         pass
