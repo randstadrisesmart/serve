@@ -3,7 +3,7 @@ FROM pytorch/torchserve:0.1.1-cuda10.1-cudnn7-runtime
 USER 0
 
 RUN apt-get update -y
-RUN apt-get install -y python3-distutils
+RUN apt-get install -y python3-distutils cuda
 
 RUN pip3 install -U pip setuptools wheel
 RUN pip3 install cython
