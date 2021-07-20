@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.2-cudnn7-runtime-ubuntu18.04
+FROM nvidia/cuda:10.2-cudnn7-devel-ubuntu18.04
 
 ARG CUDA_VERSION_TO_INSTALL=cu102
 ARG TORCH_VER=1.8.1
