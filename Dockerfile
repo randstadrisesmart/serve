@@ -13,4 +13,4 @@ RUN pip3 install --no-cache-dir captum torchtext torchserve torch-model-archiver
 
 COPY . serve/
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["tail","-f","/dev/null"]
