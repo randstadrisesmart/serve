@@ -4,7 +4,7 @@ USER 0
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y
-RUN apt-get install -y python3-distutils cuda-10-1
+RUN apt-get install -y python3-distutils cuda-nvcc-10-1
 
 RUN pip3 install -U pip setuptools wheel
 RUN pip3 install cython
