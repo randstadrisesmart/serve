@@ -25,8 +25,8 @@ ENV PATH /opt/conda/bin:$PATH
 # setup conda virtual environment
 COPY ./requirements.yaml /tmp/requirements.yaml
 RUN conda update conda \
-    && conda env create --name camera-seg -f /tmp/requirements.yaml
+    && conda env create --name skill-extractor -f /tmp/requirements.yaml
 
-RUN echo "conda activate camera-seg" >> ~/.bashrc
-ENV PATH /opt/conda/envs/camera-seg/bin:$PATH
-ENV CONDA_DEFAULT_ENV $camera-seg
+RUN echo "conda activate skill-extractor" >> ~/.bashrc
+ENV PATH /opt/conda/envs/skill-extractor/bin:$PATH
+ENV CONDA_DEFAULT_ENV $skill-extractor
