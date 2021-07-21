@@ -1,4 +1,4 @@
-FROM skill-extractor/skill-serve:pytorch-10.2-cuda-devel
+FROM 020560682473.dkr.ecr.us-east-2.amazonaws.com/skill-extractor/skill-serve:pytorch-10.2-cuda-devel
 
 USER 0
 
