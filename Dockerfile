@@ -1,32 +1,34 @@
-# Use nvidia/cuda image
-FROM nvidia/cuda:10.2-cudnn7-devel-ubuntu18.04
+FROM 020560682473.dkr.ecr.us-east-2.amazonaws.com/skill-extractor/skill-serve:pytorch-10.2-cuda-devel
 
-# set bash as current shell
-RUN chsh -s /bin/bash
-SHELL ["/bin/bash", "-c"]
+USER 0
 
-# install anaconda
-RUN apt-get update
-RUN apt-get install -y wget bzip2 ca-certificates libglib2.0-0 libxext6 libsm6 libxrender1 git mercurial subversion && \
-        apt-get clean
-RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh -O ~/anaconda.sh && \
-        /bin/bash ~/anaconda.sh -b -p /opt/conda && \
-        rm ~/anaconda.sh && \
-        ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
-        echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
-        find /opt/conda/ -follow -type f -name '*.a' -delete && \
-        find /opt/conda/ -follow -type f -name '*.js.map' -delete && \
-        /opt/conda/bin/conda clean -afy
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -y
+RUN apt-get install -y python3-distutils cuda-nvcc-10-1
 
-# set path to conda
-ENV PATH /opt/conda/bin:$PATH
+RUN pip3 install -U pip setuptools wheel
+RUN pip3 install cython
+RUN pip3 install spacy
+RUN pip3 install captum
 
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+RUN python3 -m spacy download en_core_web_sm
 
-# setup conda virtual environment
-COPY ./requirements.yaml /tmp/requirements.yaml
-RUN conda update conda \
-    && conda env create --name skill-extractor -f /tmp/requirements.yaml
+COPY . serve/
 
-RUN echo "conda activate skill-extractor" >> ~/.bashrc
-ENV PATH /opt/conda/envs/skill-extractor/bin:$PATH
-ENV CONDA_DEFAULT_ENV $skill-extractor
+RUN python serve/ts_scripts/install_dependencies.py --cuda=cu102
+RUN pip3 install transformers
+RUN torch-model-archiver --model-name bert-ner --version 1.0 --serialized-file /home/model-server/serve/final_ner_v2_gpu.pth --handler /home/model-server/serve/examples/Huggingface_Transformers/Transformer_handler_generalized.py --extra-files "/home/model-server/serve/examples/Huggingface_Transformers/setup_config.json,/home/model-server/serve/examples/Huggingface_Transformers/Token_classification_artifacts/index_to_name.json"
+
+RUN mv bert-ner.mar model-store/bert-ner.mar
+
+RUN rm /usr/local/bin/dockerd-entrypoint.sh
+
+COPY dockerd-entrypoint.sh /usr/local/bin/dockerd-entrypoint.sh
+
+RUN ["chown", "root:root", "/usr/local/bin/dockerd-entrypoint.sh"]
+
+RUN ["chmod", "+x", "/usr/local/bin/dockerd-entrypoint.sh"]
+
+USER 1000
