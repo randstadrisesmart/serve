@@ -3,6 +3,7 @@ FROM 020560682473.dkr.ecr.us-east-2.amazonaws.com/skill-extractor/skill-serve:cu
 USER 0
 
 RUN pip3 install spacy
+RUN pip3 install cython
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
