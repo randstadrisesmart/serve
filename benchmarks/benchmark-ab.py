@@ -46,7 +46,7 @@ def json_provider(file_path, cmd_name):
 @click.argument('test_plan', default='custom')
 @click.option('--url', '-u', default='https://torchserve.pytorch.org/mar_files/resnet-18.mar',
               help='Input model url')
-@click.option('--exec_env', '-e', type=click.Choice(['local', 'docker'], case_sensitive=False), default='local',
+@click.option('--exec_env', '-e', type=click.Choice(['local', 'docker'], case_sensitive=True), default='local',
               help='Execution environment')
 @click.option('--gpus', '-g', default='',
               help='Number of gpus to run docker container with.  Leave empty to run CPU based docker container')
