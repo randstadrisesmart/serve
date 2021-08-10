@@ -1,4 +1,4 @@
-FROM 020560682473.dkr.ecr.us-east-2.amazonaws.com/skill-extractor/skill-serve:cu111_image
+FROM 020560682473.dkr.ecr.us-east-2.amazonaws.com/skill-extractor/skill-serve:cu111-dev-gpu-latest
 
 USER 0
 
@@ -12,7 +12,6 @@ RUN python3 -m spacy download en_core_web_sm
 
 COPY . serve/
 
-RUN pip3 install transformers
 RUN cd  /home/model-server && torch-model-archiver --model-name bert-ner --version 1.0 --serialized-file /home/model-server/serve/final_ner_v2_gpu.pth --handler /home/model-server/serve/examples/Huggingface_Transformers/Transformer_handler_generalized.py --extra-files "/home/model-server/serve/examples/Huggingface_Transformers/setup_config.json,/home/model-server/serve/examples/Huggingface_Transformers/Token_classification_artifacts/index_to_name.json"
 
 RUN mv bert-ner.mar model-store/bert-ner.mar
