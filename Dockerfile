@@ -1,15 +1,8 @@
-FROM 020560682473.dkr.ecr.us-east-2.amazonaws.com/skill-extractor/skill-serve:pytorch-10.2-cuda-devel
+FROM 020560682473.dkr.ecr.us-east-2.amazonaws.com/skill-extractor/skill-serve:gpu_baseimage
 
 USER 0
 
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update -y
-RUN apt-get install -y python3-distutils
-
-RUN pip3 install -U pip setuptools wheel
-RUN pip3 install cython
 RUN pip3 install spacy
-RUN pip3 install captum
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
