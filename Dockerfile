@@ -2,6 +2,7 @@ FROM 020560682473.dkr.ecr.us-east-2.amazonaws.com/skill-extractor/skill-serve:cu
 
 USER 0
 
+RUN pip3 install -U pip setuptools wheel
 RUN pip3 install cython
 RUN pip3 install spacy
 
