@@ -5,6 +5,7 @@ USER 0
 RUN pip3 install -U pip setuptools wheel
 RUN pip3 install cython
 RUN pip3 install spacy
+RUN pip3 install transformers
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
