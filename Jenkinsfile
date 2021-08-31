@@ -1,1 +1,1 @@
-skillExtractorBuildPipeline(dockerRepository: 'skill-extractor/skill-serve', imageFromECR: 'true')
+skillExtractorBuildPipeline(dockerRepository: 'skill-extractor/skill-serve', modelType: 'gpu')
