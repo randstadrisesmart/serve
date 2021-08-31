@@ -1,5 +1,6 @@
 ARG BASE_IMAGE
-ARG MODEL_FILE_PATH="/home/model-server/serve/"${MODEL_FILE}
+ARG MODEL_FILE
+ENV MODEL_FILE_PATH="/home/model-server/serve/"${MODEL_FILE}
 
 FROM ${BASE_IMAGE}
 
