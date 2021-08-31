@@ -1,1 +1,1 @@
-{"label_list":"['B-SKILL', 'I-SKILL', 'O', 'PAD']"}
+{"label_list":"['O', 'B-SKILL', 'I-SKILL', 'PAD']"}
