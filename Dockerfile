@@ -24,5 +24,3 @@ COPY dockerd-entrypoint.sh /usr/local/bin/dockerd-entrypoint.sh
 RUN ["chown", "root:root", "/usr/local/bin/dockerd-entrypoint.sh"]
 
 RUN ["chmod", "+x", "/usr/local/bin/dockerd-entrypoint.sh"]
-
-USER 1000
