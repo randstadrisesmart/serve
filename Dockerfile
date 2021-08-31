@@ -1,5 +1,5 @@
 ARG BASE_IMAGE
-ARG MODEL_FILE
+ARG MODEL_FILE_PATH="/home/model-server/serve/"${MODEL_FILE}
 
 FROM ${BASE_IMAGE}
 
@@ -17,7 +17,7 @@ RUN python3 -m spacy download en_core_web_sm
 
 COPY . serve/
 
-RUN cd  /home/model-server && torch-model-archiver --model-name bert-ner --version 1.0 --serialized-file "/home/model-server/serve/"${MODEL_FILE} --handler /home/model-server/serve/examples/Huggingface_Transformers/Transformer_handler_generalized.py --extra-files "/home/model-server/serve/examples/Huggingface_Transformers/setup_config.json,/home/model-server/serve/examples/Huggingface_Transformers/Token_classification_artifacts/index_to_name.json"
+RUN cd  /home/model-server && torch-model-archiver --model-name bert-ner --version 1.0 --serialized-file ${MODEL_FILE_PATH} --handler /home/model-server/serve/examples/Huggingface_Transformers/Transformer_handler_generalized.py --extra-files "/home/model-server/serve/examples/Huggingface_Transformers/setup_config.json,/home/model-server/serve/examples/Huggingface_Transformers/Token_classification_artifacts/index_to_name.json"
 
 RUN mv bert-ner.mar model-store/bert-ner.mar
 
