@@ -1,1 +1,1 @@
-skillExtractorBuildPipeline(dockerRepository: 'skill-extractor/skill-serve', imageFromECR: 'true')
+skillExtractorBuildPipeline(dockerRepository: 'pytorch/torchserve', imageFromECR: 'true')
